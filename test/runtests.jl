@@ -86,7 +86,3 @@ end
 @test LogNum(5.)^LogNum(-2.) ≈ 5.^-2.
 @test LogNum(5.)^LogNum(0) ≈ 1
 @test LogNum(0)^LogNum(1) ≈ 0
-
-for x = -10.:10.
-    
-end
