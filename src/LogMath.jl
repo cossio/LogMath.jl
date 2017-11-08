@@ -1,5 +1,9 @@
 module LogMath
 
-# package code goes here
+include("LogNum.jl")
+
+
+export LogNum, log_add, log_sub, log1exp
+
 
 end # module
