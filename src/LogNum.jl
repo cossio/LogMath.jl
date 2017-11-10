@@ -48,7 +48,7 @@ LogNum(x::Real, s::Real) = LogNum(convert(Float64, x), Int(sign(s)))
 Base.convert(::Type{Float64}, x::LogNum) = x.s * exp(x.l)
 
 Base.iszero(x::LogNum) = iszero(x.s)
-Base.isfinite(x::LogNum) = isfinite(x.l)
+Base.isfinite(x::LogNum) = x.l < Inf
 
 Base.:(==)(x::LogNum, y::LogNum) = x.s == y.s && x.l == y.l
 Base.:(==)(x::LogNum, y::Real) = x == LogNum(y)

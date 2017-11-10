@@ -16,7 +16,17 @@ end
 @test LogNum(5.5, 0) == LogNum()
 @test LogNum(-Inf, 0) == LogNum()
 @test LogNum(-Inf, 43) == LogNum()
+
 @test iszero(LogNum())
+@test iszero(LogNum(0))
+@test !iszero(LogNum(1))
+@test !iszero(LogNum(-1))
+
+@test isfinite(LogNum(0))
+@test isfinite(LogNum(1))
+@test isfinite(LogNum(-1))
+@test !isfinite(LogNum(Inf))
+@test !isfinite(LogNum(-Inf))
 
 for x = -10.:10.
     @test LogNum(x) == LogNum(x) == x
@@ -65,6 +75,7 @@ for x = -10.:10.
     @test convert(Float64, LogNum(x)) ≈ x
     @test abs(LogNum(x)) ≈ abs(x)
     @test exp(LogNum(x)) ≈ exp(x)
+    @test sign(LogNum(x)) == sign(x)
 end
 
 for x = 0.:5., y = -5.:5.
