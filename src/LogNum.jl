@@ -82,10 +82,20 @@ function Base.:(+)(x::LogNum, y::LogNum)
 end
 
 
+function Base.:(/)(x::LogNum, y::LogNum)
+    if iszero(x) && iszero(y)
+        throw(DomainError())
+    elseif iszero(y)
+        LogNum(Inf, x.s)
+    else
+        LogNum(x.l - y.l, x.s * y.s)
+    end
+end
+
+
 Base.:(-)(x::LogNum) = LogNum(x.l, -x.s)
 Base.:(-)(x::LogNum, y::LogNum) = x + (-y)
 Base.:(*)(x::LogNum, y::LogNum) = LogNum(x.l + y.l, x.s * y.s)
-Base.:(/)(x::LogNum, y::LogNum) = iszero(y) ? LogNum(Inf, x.s) : LogNum(x.l - y.l, x.s * y.s)
 Base.:(^)(x::LogNum, y::LogNum) = exp(y * log(x))
 
 Base.:(+)(x::LogNum, y::Real) = x + LogNum(y)

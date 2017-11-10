@@ -88,7 +88,7 @@ for x = -10.:10., y = -10.:10.
     @test LogNum(x) + LogNum(y) ≈ x + y
     @test LogNum(x) - LogNum(y) ≈ x - y
     @test LogNum(x) * LogNum(y) ≈ x * y
-    if !(x == y == 0)
+    if x ≠ 0 || y ≠ 0
         @test LogNum(x) / LogNum(y) ≈ x / y
     end
 end
