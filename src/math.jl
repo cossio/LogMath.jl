@@ -11,7 +11,8 @@ end
 
 
 "log(1 - exp(-x))"
-function log1exp(x)
+function log1mexp(x)
+    # https://cran.r-project.org/web/packages/Rmpfr/vignettes/log1mexp-note.pdf
     x ≥ 0 || throw(DomainError())
     if x < -log(2)
         log(-expm1(-x))
@@ -24,7 +25,7 @@ end
 "log(|x-y|) from log(x) and log(y)"
 function log_sub(lx, ly)
     if min(lx, ly) > -Inf
-        return max(lx, ly) + log1exp(abs(lx - ly))
+        return max(lx, ly) + log1mexp(abs(lx - ly))
     else
         return max(lx, ly)
     end
