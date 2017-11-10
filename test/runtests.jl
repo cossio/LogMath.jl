@@ -5,7 +5,7 @@ using LogMath, Base.Test
 
 
 for x = 0.:10.
-    @test log1exp(-x) ≈ log(1 - exp(-x))
+    @test log1exp(x) ≈ log(1 - exp(-x))
 end
 
 for x = 0.:10., y = 0.:10.
