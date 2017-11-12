@@ -1,10 +1,10 @@
-export log_add, log_sub, log1mexp, log1pexp
+export logadd, logsub, log1mexp, log1pexp
 
 
 "log(x+y) from log(x) and log(y)"
-function log_add(lx, ly)
+function logadd(lx, ly)
     if lx > ly
-        return log_add(ly, lx)
+        return logadd(ly, lx)
     elseif -Inf < lx ≤ ly < Inf
         return ly + log1p(exp(lx - ly))
     else
@@ -14,7 +14,7 @@ end
 
 
 "log(|x-y|) from log(x) and log(y)"
-function log_sub(lx, ly)
+function logsub(lx, ly)
     if min(lx, ly) > -Inf
         return max(lx, ly) + log1mexp(abs(lx - ly))
     else

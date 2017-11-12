@@ -17,8 +17,8 @@ for x = 0.:100.
 end
 
 for x = 0.:10., y = 0.:10.
-    @test log_add(log(x), log(y)) ≈ log(x + y)
-    @test log_sub(log(x), log(y)) ≈ log(abs(x - y)) atol=1e-14
+    @test logadd(log(x), log(y)) ≈ log(x + y)
+    @test logsub(log(x), log(y)) ≈ log(abs(x - y)) atol=1e-14
 end
 
 @test LogNum(5.5, 0) == LogNum()

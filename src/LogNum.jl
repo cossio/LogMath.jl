@@ -52,9 +52,9 @@ end
 
 function Base.:(+)(x::LogNum, y::LogNum)
     if x.s == y.s
-        LogNum(log_add(x.l, y.l), x.s)
+        LogNum(logadd(x.l, y.l), x.s)
     else
-        LogNum(log_sub(x.l, y.l), x.l > y.l ? x.s : y.s)
+        LogNum(logsub(x.l, y.l), x.l > y.l ? x.s : y.s)
     end
 end
 
