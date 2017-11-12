@@ -1,3 +1,7 @@
+@test inf(1.) == inf(Float64) == Inf
+@test inf(Float16(1.)) == inf(Float16) == Inf16
+@test_throws InexactError inf(Int)
+
 for x = 0.:0.1:10.
     @test log1mexp(x) ≈ log(1 - exp(-x))
 end

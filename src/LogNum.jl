@@ -1,26 +1,26 @@
 export LogNum
 
 
-struct LogNum
-    l::Float64 # log of the absolute value
+struct LogNum{T}
+    l::T # log of the absolute value
     s::Int # sign
 
-    function LogNum(l::Float64, s::Int)
+    function LogNum{T}(l::T, s::Int) where T
         s = sign(s)
-        if l == -Inf
+        if isinf(l) && l < 0
             s = 0
         elseif s == 0
-            l = -Inf
+            l = -inf(T)
         end
         new(l, s)
     end
 end
 
 
+LogNum(l::T, s::Int) where T = LogNum{T}(l, s)
 LogNum() = LogNum(-Inf, 0)
 LogNum(x::LogNum) = x
 LogNum(x::Real) = LogNum(log(abs(x)), Int(sign(x)))
-LogNum(x::Real, s::Real) = LogNum(convert(Float64, x), Int(sign(s)))
 
 Base.convert(::Type{Float64}, x::LogNum) = x.s * exp(x.l)
 

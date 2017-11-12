@@ -1,4 +1,13 @@
-export logadd, logsub, log1mexp, log1pexp
+export logadd, logsub, log1mexp, log1pexp, inf
+
+
+function inf(::Type{T})::T where T
+    one(T) / zero(T)
+end
+
+function inf(x::T)::T where T
+    inf(T)
+end
 
 
 "log(x+y) from log(x) and log(y)"
