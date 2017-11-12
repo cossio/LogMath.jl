@@ -1,5 +1,5 @@
 "log(x+y) from log(x) and log(y)"
-function log_add(lx::Float64, ly::Float64)
+function log_add(lx, ly)
     if lx > ly
         return log_add(ly, lx)
     elseif -Inf < lx ≤ ly < Inf
