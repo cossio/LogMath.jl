@@ -10,7 +10,7 @@ function log_add(lx, ly)
 end
 
 
-"log(1 - exp(-x))"
+"log(1 - exp(-x)), x ≥ 0"
 function log1mexp(x)
     # https://cran.r-project.org/web/packages/Rmpfr/vignettes/log1mexp-note.pdf
     x ≥ 0 || throw(DomainError())
