@@ -1,3 +1,6 @@
+export LogNum
+
+
 struct LogNum
     l::Float64 # log of the absolute value
     s::Int # sign
