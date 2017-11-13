@@ -21,6 +21,8 @@ function logadd(lx, ly)
     end
 end
 
+logadd(lx, ly, lz, ls...) = foldl(logadd, (logadd(logadd(lx,ly),lz), ls...))
+
 
 "log(|x-y|) from log(x) and log(y)"
 function logsub(lx, ly)
