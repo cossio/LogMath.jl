@@ -12,6 +12,21 @@
 @test isfinite(LogNum(-1))
 @test !isfinite(LogNum(Inf))
 @test !isfinite(LogNum(-Inf))
+@test isinf(LogNum(Inf))
+@test !isinf(LogNum(0))
+
+@test isnan(LogNum(NaN))
+@test isnan(LogNum(NaN, 1))
+@test isnan(LogNum(NaN, -1))
+@test !isnan(LogNum(1.))
+@test isnan(LogNum(NaN) + LogNum(1))
+@test isnan(LogNum(NaN) - LogNum(1))
+@test isnan(LogNum(NaN) * LogNum(1))
+@test isnan(LogNum(NaN) / LogNum(1))
+@test isnan(LogNum(NaN) ^ LogNum(1))
+
+@test convert(Float64, LogNum(1.)) == 1.
+
 
 for x = -10.:10.
     @test LogNum(x) == LogNum(x) == x
@@ -21,13 +36,16 @@ for x = -10.:10.
     @test LogNum(x + 1) > LogNum(x)
 end
 
+
 @test sign(LogNum(1)) == 1
 @test sign(LogNum(-42.1)) == -1
 @test sign(LogNum(0.)) == 0
 
+
 @test LogNum(2) > LogNum(1)
 @test LogNum(-1) < LogNum(1)
 @test LogNum(3.4) ≤ LogNum(3.4)
+
 
 @test LogNum(-10) ≈ LogNum(-20) + LogNum(10)
 @test LogNum(-200) ≈ LogNum(20) * LogNum(-10)
@@ -64,9 +82,11 @@ for x = -10.:10.
 end
 
 for x = 0.:5., y = -5.:5.
-    @test isapprox(LogNum(x) ^ LogNum(y), x ^ y; atol=1e-12)
-    @test isapprox(LogNum(x) ^ y, x ^ y; atol=1e-12)
-    @test isapprox(x ^ LogNum(y), x ^ y; atol=1e-12)
+    if x ≠ 0 || y ≠ 0
+        @test isapprox(LogNum(x) ^ LogNum(y), x ^ y; atol=1e-12)
+        @test isapprox(LogNum(x) ^ y, x ^ y; atol=1e-12)
+        @test isapprox(x ^ LogNum(y), x ^ y; atol=1e-12)
+    end
 end
 
 for x = -10.:10., y = -10.:10.
@@ -82,3 +102,5 @@ end
 @test LogNum(5.)^LogNum(-2.) ≈ 5.^-2.
 @test LogNum(5.)^LogNum(0) ≈ 1
 @test LogNum(0)^LogNum(1) ≈ 0
+@test LogNum(0) ^ LogNum(0) == 1
+@test LogNum(4) ^ 2 ≈ 4^2
